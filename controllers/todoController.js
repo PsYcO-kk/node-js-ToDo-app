@@ -3,6 +3,12 @@ var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/todo');
 
+mongoose.connection.once('open', function(){
+  console.log('Connection has been made...');
+}).on('error', function(error){
+  console.log('Connection error:', error);
+});
+
 //Create a schema - this is like a blueprint
 var todoSchema = new mongoose.Schema({
   item: String
