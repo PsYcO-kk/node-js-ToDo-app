@@ -22,23 +22,30 @@ var urlencodedParser = bodyParser.urlencoded({extended: false});
 module.exports = function(app){
 
   app.get('/todo', function(req, res){
-    Todo.find({}, function(err, data){
+    Todo.find({}, function(err, result){
       if (err) throw err;
-      res.render('todo', {todos: data});
+      res.render('todo', {todos: result});
     });
   });
 
   app.post('/todo', urlencodedParser, function(req, res){
-    var newTodo = Todo(req.body).save(function(err, data){
+    var newTodo = Todo(req.body).save(function(err, result){
       if (err) throw err;
-      res.json(data);
+      res.json(result);
     });
   });
 
-  app.delete('/todo/:item', function(req, res){
-    Todo.find({item: req.params.item.replace(/\-/g, " ")}).remove(function(err, data){
+  app.put('/todo/:id', urlencodedParser, function(req, res){
+    Todo.findByIdAndUpdate({_id: req.params.id}, {item: req.body.item}, function(err, result){
       if (err) throw err;
-      res.json(data);
+      else res.send('done');
+    });
+  });
+
+  app.delete('/todo/:id', function(req, res){
+    Todo.find({_id: req.params.id}).remove(function(err, result){
+      if (err) throw err;
+      else res.send('done');
     });
   });
 
