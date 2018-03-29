@@ -6,23 +6,26 @@
     <link href="/assets/styles.css" rel="stylesheet">
   </head>
   <body>
-    <h1>My To-Do List</h1>
-    <div>
-      <form>
-        <input type="text" name="item" size="50" placeholder="Add new item..." required />
-        <input type="submit" value="Add Item" />
-      </form>
-      <p class="alert"></p>
-      <ol>
-        <% todos.forEach(function(list){ %>
-          <li>
-            <input type="text" id="todo_<%= list._id %>" class="todo-item" size="50" value="<%= list.item %>" disabled />
-            <input type="button" id="edit_<%= list._id %>" class="edit-btn" value="Edit" />
-            <input type="button" id="update_<%= list._id %>" class="update-btn" value="Update" hidden />
-            <input type="button" id="delete_<%= list._id %>" class="delete-btn" value="Delete" />
-          </li>
-        <% }) %>
-      </ol>
+    <div class="container">
+      <h1 align="center">My To-Do List</h1>
+      <div align="center" class="form-container">
+        <form>
+          <input type="text" name="item" size="50" placeholder="Add new item..." required />
+          <input type="submit" class="submit-btn" value="Add Item" />
+        </form>
+      </div>
+      <p class="alert" align="center" hidden></p>
+      <div class="todo-list">
+      <% todos.forEach(function(list){ %>
+        <div align="center" class="todo-container">
+          <input type="text" id="todo_<%= list._id %>" class="todo-item" size="50" value="<%= list.item %>" disabled />
+          <input type="button" id="edit_<%= list._id %>" class="edit-btn" value="Edit" />
+          <input type="button" id="x_<%= list._id %>" class="x-btn" value="X" hidden />
+          <input type="button" id="update_<%= list._id %>" class="update-btn" value="Update" hidden />
+          <input type="button" id="delete_<%= list._id %>" class="delete-btn" value="Delete" />
+        </div>
+      <% }) %>
+      </div>
     </div>
   </body>
 </html>
